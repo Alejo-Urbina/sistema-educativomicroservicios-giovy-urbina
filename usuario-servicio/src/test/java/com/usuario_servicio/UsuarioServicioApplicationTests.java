@@ -25,6 +25,8 @@ class UsuarioServicioApplicationTests {
 
 	private Integer usuarioId;
 
+	private final String TOKEN = "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc0NDY4NzE4NSwiZXhwIjoxNzQ0NjkwNzg1fQ.tA3taJbhHpGN5Fv9BGr1NTT1WpkJzWaZiicNjF-KT9s";
+
 	@BeforeEach
 	void setUp() {
 		UsuarioSolicitud usuario = new UsuarioSolicitud("Juan Pérez", "juan@example.com", "ESTUDIANTE");
@@ -34,6 +36,7 @@ class UsuarioServicioApplicationTests {
 	@Test
 	void debeObtenerUsuarioPorId() throws Exception {
 		mockMvc.perform(get("/usuarios/{id}", usuarioId)
+						.header("Authorization", TOKEN)
 						.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.id").value(usuarioId))
