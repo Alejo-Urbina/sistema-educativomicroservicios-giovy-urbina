@@ -85,6 +85,20 @@ spring.h2.console.enabled=true
 spring.datasource.url=jdbc:h2:mem:nombre_basedatos;DB_CLOSE_DELAY=-1
 spring.jpa.hibernate.ddl-auto=update
 
+🧪 Pruebas de Integración
+
+Cada microservicio cuenta con **una prueba de integración** que verifica los principales endpoints:
+
+- `usuarios-servicio`: Prueba del endpoint `GET /usuarios/{id}`
+- `asignaturas-servicio`: Prueba del endpoint `GET /asignatura/{id}`
+- `matriculas-servicio`: Prueba del endpoint `GET /matricula/usuario/{id}` utilizando mocks para los Feign Clients
+
+#### 👉 Ejecutar las pruebas:
+Desde la raíz de cada microservicio, corre el siguiente comando:
+
+``bash
+./gradlew test
+
 🚀 Docker y Docker Compose
 
 Dockerfile genérico para cada microservicio:
@@ -132,7 +146,3 @@ docker-compose down
 Cada microservicio es independiente.
 
 La comunicación se realiza por HTTP.
-
-No se utiliza Eureka ni Config Server en esta versión.
-
-JWT para seguridad puede agregarse más adelante en usuarios-servicio
