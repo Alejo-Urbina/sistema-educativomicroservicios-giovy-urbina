@@ -99,6 +99,21 @@ Desde la raíz de cada microservicio, corre el siguiente comando:
 ``bash
 ./gradlew test
 
+🔐 Seguridad con JWT (usuarios-servicio)
+
+Se implementó autenticación basada en **JWT** para proteger los endpoints:
+
+- Se utiliza `Spring Security` para proteger el endpoint `GET /usuarios/{id}`.
+- Se genera un token JWT con un usuario `admin` y se valida automáticamente en cada petición.
+- El microservicio `matriculas-servicio` incluye un interceptor que envía el token JWT en los Feign Clients hacia `usuarios-servicio`.
+
+Para probar autenticación:
+1. Generar un token vía `/auth/login` (endpoint simulado o mockeado).
+2. Incluir en las peticiones el encabezado:
+   ```http
+   Authorization: Bearer <token>
+   ```
+
 🚀 Docker y Docker Compose
 
 Dockerfile genérico para cada microservicio:
